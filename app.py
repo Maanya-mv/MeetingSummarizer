@@ -2,20 +2,22 @@ import os
 import time
 import requests
 import streamlit as st
-from dotenv import load_dotenv
 
+try:
+    ASSEMBLY_KEY = st.secrets["ASSEMBLYAI_API_KEY"]
+    HUGGING_KEY = st.secrets["HUGGINGFACE_API_KEY"]
+    HF_MODEL = st.secrets.get("HF_SUMMARY_MODEL", "sshleifer/distilbart-cnn-12-6")
+except Exception as e:
+    st.error(f" Could not load API keys. Check Streamlit secrets: {e}")
+    st.stop()
 
-
-ASSEMBLY_KEY = st.secrets["ASSEMBLYAI_API_KEY"]
-HUGGING_KEY = st.secrets["HUGGINGFACE_API_KEY"]
-HF_MODEL = st.secrets.get("HF_SUMMARY_MODEL", "sshleifer/distilbart-cnn-12-6")
 
 
 st.set_page_config(page_title="Meeting Summarizer", page_icon="")
 st.title("AI Meeting Summarizer")
 st.caption("Upload a meeting recording. I’ll transcribe it with AssemblyAI and summarize it with Hugging Face.")
 
-uploaded = st.file_uploader("🎧 Upload an audio file", type=["mp3", "wav", "m4a"])
+uploaded = st.file_uploader(" Upload an audio file", type=["mp3", "wav", "m4a"])
 
 
 def summarize_text_snippet(snippet: str, retries: int = 3) -> str:
