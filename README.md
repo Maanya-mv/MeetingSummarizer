@@ -2,7 +2,7 @@
 
 ## Overview
 
-Meeting Summarizer is a Python-based application that allows users to upload an audio file and/or a meeting transcript. The system processes the input, extracts key points, and generates a concise meeting summary. This eliminates manual note-taking and provides quick insights.
+Meeting Summarizer is a Python-based application that allows users to upload an audio file of a meeting. The system processes the input, extracts key points, and generates a concise meeting summary. This eliminates manual note-taking and provides quick insights.
 
 ---
 
